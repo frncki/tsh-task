@@ -1,0 +1,30 @@
+{
+  "name": "recruitment-task-tsh",
+  "version": "0.1.0",
+  "description": "Recruitment Task for The Software House",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frncki/tsh-task.git"
+  },
+  "author": "Franciszek Mirecki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frncki/tsh-task/issues"
+  },
+  "homepage": "https://github.com/frncki/tsh-task#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
