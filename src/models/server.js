@@ -7,6 +7,7 @@ class Server {
         this.port = process.env.PORT; // Loaded from .env file
         this.paths = {
             index: "/",
+            movies: "/movies",
         };
 
         this.middlewares();
@@ -21,6 +22,7 @@ class Server {
     // Bind controllers to routes
     routes () {
         this.app.use(this.paths.index, require("../routes/index"));
+        this.app.use(this.paths.movies, require("../routes/movies"));
     }
 
     listen () {
