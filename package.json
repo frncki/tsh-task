@@ -2,9 +2,9 @@
   "name": "recruitment-task-tsh",
   "version": "0.1.0",
   "description": "Recruitment Task for The Software House",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon --exec babel-node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
