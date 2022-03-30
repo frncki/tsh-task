@@ -18,18 +18,30 @@ const isInRange = (runtime, duration, range) => {
 
 const getMoviesByGenres = (movies, genres) => {
     let filteredMovies = new Set();
-
-  movies.forEach((movie) => {
-    movie.genres.forEach((dbGenre) => {
-      genres.forEach((inputGenre) => {
-        if (inputGenre.toLowerCase() === dbGenre.toLowerCase()) {
-          filteredMovies.add(movie);
-        }
+    let inputGenres = parseInputGenres(genres);
+    
+    movies.forEach((movie) => {
+      movie.genres.forEach((dbGenre) => {
+        inputGenres.forEach((inputGenre) => {
+          if (inputGenre.toLowerCase() === dbGenre.toLowerCase()) {
+            filteredMovies.add(movie);
+          }
+        });
       });
     });
-  });
 
-  return filteredMovies;
+    return filteredMovies;
 }
+
+const parseInputGenres = (genres) => {
+  let parsedGenres = decodeURIComponent(genres);
+  parsedGenres = parsedGenres.match(/\[(.+)\]/);
+  if (!!parsedGenres[1]) {
+    parsedGenres = parsedGenres[1].split(",");
+  } else {
+    parsedGenres = genres.split(",");
+  }
+  return parsedGenres;
+};
 
 export { getMoviesByDuration, getMoviesByGenres };

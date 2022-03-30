@@ -33,7 +33,7 @@ router.get('/', (req, res, next) => { // genres only
     let genres = req.query.genres;
     if (!duration && genres) {
         console.log('genres only');
-        const filteredMovies = getMoviesByGenres(movies, ['Horror', 'Thriller', 'Drama']);
+        const filteredMovies = getMoviesByGenres(movies, genres);
         return res.send(filteredMovies);
     } else {
         return next();
@@ -45,7 +45,9 @@ router.get('/', (req, res, next) => { // duration and genres
     let genres = req.query.genres;
     if (duration && genres) {
         console.log('duration and genres');
-        return res.send({ duration, genres });
+        let filteredMovies = getMoviesByGenres(movies, genres);
+        filteredMovies = getMoviesByDuration(filteredMovies, duration, 10);
+        return res.send(filteredMovies);
     }
 });
 
