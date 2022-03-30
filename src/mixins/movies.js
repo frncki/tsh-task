@@ -17,10 +17,19 @@ const isInRange = (runtime, duration, range) => {
 }
 
 const getMoviesByGenres = (movies, genres) => {
-    const moviesSet = movies.reduce((prev, curr) => new Set([...prev, ...curr.genres]), new Set);
-    console.log(moviesSet);
-    const filteredMovies = genres.filter(a => !moviesSet.has(a.genre));
-    return filteredMovies;
+    let filteredMovies = new Set();
+
+  movies.forEach((movie) => {
+    movie.genres.forEach((dbGenre) => {
+      genres.forEach((inputGenre) => {
+        if (inputGenre.toLowerCase() === dbGenre.toLowerCase()) {
+          filteredMovies.add(movie);
+        }
+      });
+    });
+  });
+
+  return filteredMovies;
 }
 
 export { getMoviesByDuration, getMoviesByGenres };

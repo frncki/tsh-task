@@ -33,7 +33,7 @@ router.get('/', (req, res, next) => { // genres only
     let genres = req.query.genres;
     if (!duration && genres) {
         console.log('genres only');
-        const filteredMovies = getMoviesByGenres(movies, { genre: 'Horror' });
+        const filteredMovies = getMoviesByGenres(movies, ['Horror', 'Thriller', 'Drama']);
         return res.send(filteredMovies);
     } else {
         return next();
