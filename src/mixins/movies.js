@@ -39,7 +39,7 @@ const getMoviesByGenres = (movies, inputGenres) => {
     });
   });
 
-  let sortedMovies = sortDescByMatchingGenres(filteredMovies, matchControl);
+  const sortedMovies = sortDescByMatchingGenres(filteredMovies, matchControl);
 
   return sortedMovies;
 }
@@ -47,10 +47,10 @@ const getMoviesByGenres = (movies, inputGenres) => {
 const sortDescByMatchingGenres = (movies, matchControl) => {
   movies = Array.from(movies);
   matchControl = Array.from(matchControl);
+
+  const sortedMovies = quickSort({ movies, matchControl }, 0, movies.length - 1).movies;
   
-  const sortedMovies = quickSort({ movies, matchControl }, 0, movies.length - 1)
-  
-  return sortedMovies.movies;
+  return sortedMovies;
 }
 
 const parseInputGenres = (genres) => {

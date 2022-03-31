@@ -1,7 +1,10 @@
 import express from "express";
-import { movies, genresDict } from "../../data/db.json";
+import { Validator } from "express-json-validator-middleware";
+const { validate } = new Validator();
 
+import { movies } from "../../data/db.json";
 import { getMoviesByDuration, getMoviesByGenres } from "../mixins/movies";
+import { movieSchema } from "../models/validation";
 
 const router = express.Router();
 
@@ -41,7 +44,7 @@ router.get('/', (req, res, next) => { // genres only
     }
 });
 
-router.get('/', (req, res, next) => { // duration and genres
+router.get('/', (req, res) => { // duration and genres
     let duration = req.query.duration;
     let genres = req.query.genres;
     if (duration && genres) {
@@ -52,9 +55,12 @@ router.get('/', (req, res, next) => { // duration and genres
     }
 });
 
-
 router.get('/all', (req, res) => { // for testing/checking purposes
     return res.send(movies);
+});
+
+router.post('/', validate({ body: movieSchema }), (req, res, next) => {
+    return res.send('movies');
 });
 
 module.exports = router;
