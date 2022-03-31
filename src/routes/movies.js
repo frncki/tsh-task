@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => { // no params
     let duration = req.query.duration;
     let genres = req.query.genres;
     if (!duration && !genres) {
-        let randomMovieIndex = Math.floor(Math.random() * movies.length);
+        const randomMovieIndex = Math.floor(Math.random() * movies.length);
         return res.send(movies[randomMovieIndex]);
     } else {
         return next();
@@ -22,7 +22,8 @@ router.get('/', (req, res, next) => { // duration only
     if (duration && !genres) {
         console.log('duration only');
         const filteredMovies = getMoviesByDuration(movies, duration, 10);
-        return res.send(filteredMovies);
+        const randomMovieIndex = Math.floor(Math.random() * filteredMovies.length);
+        return res.send(filteredMovies[randomMovieIndex]);
     } else {
         return next();
     }
