@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from "express";
+import { validationErrorMiddleware } from '../middleware/validationError';
 
 class Server {
     constructor() {
@@ -17,6 +18,7 @@ class Server {
     middlewares () {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(validationErrorMiddleware);
     }
 
     // Bind controllers to routes
