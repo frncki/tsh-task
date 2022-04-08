@@ -7,32 +7,38 @@ const movieSchema = {
 		title: {
 			type: "string",
 			minLength: 1,
-            maxLength: 255,
+			maxLength: 255,
 		},
 		year: {
 			type: "integer",
-			minimum: 1888, //first movie was in year 1888
+			minimum: 1888, //first movie was made in year 1888
 		},
-        runtime: {
+		runtime: {
 			type: "integer",
-            minimum: 1,
+			minimum: 1,
 		},
-        genres: {
-			type: "string",
-			enum: genres,
+		genres: {
+			description: "Movies genres",
+			type: "array",
+			items: {
+				type: "string",
+				enum: genres,
+			},
+			minItems: 1,
+			uniqueItems: true
 		},
-        director: {
+		director: {
 			type: "string",
 			minLength: 1,
-            maxLength: 255,
+			maxLength: 255,
 		},
 		actors: {
 			type: "string",
 		},
-        plot: {
+		plot: {
 			type: "string",
 		},
-        posterUrl: {
+		posterUrl: {
 			type: "string",
 			minLength: 4,
 		},
