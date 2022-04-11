@@ -1,4 +1,4 @@
-import { genres } from "../../data/db.json";
+import { genres } from "../data/db.json";
 import ajv from "./ajv";
 
 const movieSchema = {
