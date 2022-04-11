@@ -1,11 +1,10 @@
 import 'dotenv/config';
 import express from "express";
-import { validationErrorMiddleware } from '../middleware/validationError';
 
 class Server {
     constructor() {
         this.app = express();
-        this.port = process.env.PORT; // Loaded from .env file
+        this.port = process.env.PORT || 8081;
         this.paths = {
             index: "/",
             movies: "/movies",
@@ -18,7 +17,6 @@ class Server {
     middlewares () {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
-        this.app.use(validationErrorMiddleware);
     }
 
     // Bind controllers to routes
