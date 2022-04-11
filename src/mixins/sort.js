@@ -1,5 +1,3 @@
-// based on www.guru99.com/quicksort-in-javascript.html by James Hartman, adapted for tasks needs (there is no need to reinvent the wheel)
-
 const swap = (movies, matchControl, leftIndex, rightIndex) => {
     let tempControl = matchControl[leftIndex];
     matchControl[leftIndex] = matchControl[rightIndex];

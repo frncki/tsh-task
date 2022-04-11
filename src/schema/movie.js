@@ -1,4 +1,5 @@
 import { genres } from "../../data/db.json";
+import ajv from "./ajv";
 
 const movieSchema = {
 	type: "object",
@@ -45,4 +46,4 @@ const movieSchema = {
 	},
 };
 
-export { movieSchema };
+module.exports = ajv.compile(movieSchema);

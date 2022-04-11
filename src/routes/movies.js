@@ -1,10 +1,10 @@
 import express from "express";
-import { Validator } from "express-json-validator-middleware";
-const { validate } = new Validator();
 
 import { movies } from "../../data/db.json";
 import { getMoviesByDuration, getMoviesByGenres } from "../mixins/movies";
-import { movieSchema } from "../models/validation";
+
+import movieSchema from "../schema/movie";
+import validate from "../middleware/validate";
 
 const router = express.Router();
 
@@ -59,8 +59,8 @@ router.get('/all', (req, res) => { // for testing/checking purposes
     return res.send(movies);
 });
 
-router.post('/', validate({ body: movieSchema }), (req, res, next) => {
-    return res.send('movies');
+router.post('/', validate(movieSchema), (req, res, next) => {
+    return res.send(req.body);
 });
 
 module.exports = router;
