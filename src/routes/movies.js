@@ -66,7 +66,7 @@ router.post('/', validate(movieSchema), (req, res, next) => {
     const movie = req.body;
     let database = db;
     database.movies.push(movie);
-
+    // TODO implement adding increasing id to movie
     const dataFilePath = path.join(__dirname, '../data/db.json');
     fs.writeFileSync(dataFilePath, JSON.stringify(database), { encoding: 'utf8', flag: 'w' });
     return res.status(201).send({ message: 'movie saved successfully' });
