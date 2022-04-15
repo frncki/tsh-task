@@ -60,12 +60,12 @@ describe('negative GET /movies', () => { //negative tests
     );
 });
 
-describe('positive POST /movies',  () => {
+describe('positive POST /movies', () => {
     it('returns status 201 if title, year, runtime, genres, director are passed', async () => {
         const payload = {
             "title": "Star Wars: Episode VI - Return of the Jedi",
-            "year": "1983",
-            "runtime": "131",
+            "year": 1983,
+            "runtime": 131,
             "genres": [
                 "Action",
                 "Adventure",
@@ -82,9 +82,28 @@ describe('positive POST /movies',  () => {
     });
 });
 
-describe('negative POST /movies',  () => {
+describe('negative POST /movies', () => {
     it('returns status 400 if title is missing', async () => {
         const payload = {};
+        const res = await request(server.app).post(`/movies`).send(payload);
+
+        expect(res.statusCode).toEqual(400); //actual test will be written here!
+    });
+    it('returns status 400 if year is not an integer', async () => {
+        const payload = {
+            "title": "Star Wars: Episode VI - Return of the Jedi",
+            "year": "1983",
+            "runtime": 131,
+            "genres": [
+                "Action",
+                "Adventure",
+                "Sci-Fi"
+            ],
+            "director": "Richard Marquand",
+            "actors": "Marc Hamill, Harrison Ford, Carrie Fisher, Peter Mayhew",
+            "plot": "After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor's trap.",
+            "posterUrl": "https://m.media-amazon.com/images/I/9190g1V08iL._AC_SY879_.jpg"
+        };
         const res = await request(server.app).post(`/movies`).send(payload);
 
         expect(res.statusCode).toEqual(400); //actual test will be written here!

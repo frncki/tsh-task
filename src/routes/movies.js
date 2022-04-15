@@ -29,6 +29,9 @@ router.get('/', (req, res, next) => { // duration only
         console.log('duration only');
         const filteredMovies = getMoviesByDuration(db.movies, duration, 10);
         const randomMovieIndex = randomInt(0, filteredMovies.length);
+        if (!filteredMovies.length) {
+            return res.status(404).send(filteredMovies);
+        }
         return res.status(200).send(filteredMovies[randomMovieIndex]);
     } else {
         return next();
@@ -41,6 +44,9 @@ router.get('/', (req, res, next) => { // genres only
     if (!duration && genres) {
         console.log('genres only');
         const filteredMovies = getMoviesByGenres(db.movies, genres);
+        if (!filteredMovies.length) {
+            return res.status(404).send(filteredMovies);
+        }
         return res.status(200).send(filteredMovies);
     } else {
         return next();
@@ -54,6 +60,9 @@ router.get('/', (req, res) => { // duration and genres
         console.log('duration and genres');
         let filteredMovies = getMoviesByGenres(db.movies, genres);
         filteredMovies = getMoviesByDuration(filteredMovies, duration, 10);
+        if (!filteredMovies.length) {
+            return res.status(404).send(filteredMovies);
+        }
         return res.status(200).send(filteredMovies);
     }
 });
