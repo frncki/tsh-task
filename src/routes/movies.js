@@ -2,7 +2,7 @@ import express from "express";
 import path from 'path';
 import fs from 'fs';
 
-import db from "../data/db.json";
+import db from "../mixins/readDb";
 import { getMoviesByDuration, getMoviesByGenres } from "../mixins/movies";
 import { randomInt } from "../mixins/random";
 
