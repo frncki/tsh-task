@@ -64,3 +64,10 @@ export const getMoviesByGenres = (movies, inputGenres) => {
 
   return sortedMovies;
 }
+
+export const generateMovieId = ({ movies }) => {
+  const lastMovieId = movies[movies.length - 1].id;
+  return lastMovieId + 1;
+}
+
+const str = "['asdasda', 'asdasdas', 'asdasd']";

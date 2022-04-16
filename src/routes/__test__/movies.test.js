@@ -24,9 +24,17 @@ describe('positive GET /movies', () => { // positive tests
         }
     );
 
-    it('returns status 200 and an array of movies with genres specified array of genres as a query param, sorted by similarity, narrowed by duration specified as a query param',
+    it('returns status 200 and an array of movies with genres specified in array of genres as a query param, sorted by similarity, narrowed by duration specified as a query param',
         async () => {
             const res = await request(app).get('/movies?genres=Drama,Thriller,Fantasy&duration=120');
+
+            expect(res.statusCode).toEqual(200); // actual test will be written here!
+        }
+    );
+
+    it('returns status 200 if genres in query param matches at least one from db',
+        async () => {
+            const res = await request(app).get(`/movies?genres=Soap-Opera,Romantic-Comedy,Fantasy`);
 
             expect(res.statusCode).toEqual(200); // actual test will be written here!
         }
@@ -44,9 +52,9 @@ describe('negative GET /movies', () => { // negative tests
 
     it('returns status 404 if genres in query param doesnt match any from db',
         async () => {
-            const res = await request(app).get(`/movies?genres=Drama,Thriller,Fantasy`);
+            const res = await request(app).get(`/movies?genres=Soap-Opera,Romantic-Comedy,Indie`);
 
-            expect(res.statusCode).toEqual(200); // actual test will be written here!
+            expect(res.statusCode).toEqual(404); // actual test will be written here!
         }
     );
 });
@@ -70,6 +78,7 @@ describe('positive POST /movies', () => {
         const res = await request(app).post(`/movies`).send(payload);
 
         expect(res.statusCode).toEqual(201); // actual test will be written here!
+        expect
     });
 });
 
