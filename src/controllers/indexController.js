@@ -1,5 +1,7 @@
-const main = (req, res, next) => {
-    return res.send('Henlo The Software House task 👨🏻‍💻🏠');
-};
+const indexController = {
+    main: (req, res) => {
+        return res.send('Henlo The Software House task 👨🏻‍💻🏠');
+    }
+}
 
-export { main };
+export default indexController;

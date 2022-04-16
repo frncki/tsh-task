@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 
-import movieSchema from "../schema/movie";
-import validate from "../middleware/validate";
+import movieController from '../controllers/movieController';
 
-import * as movieController from '../controllers/movieController';
+import movieSchema from '../schema/movie';
+import validate from '../middleware/validate';
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.get('/', movieController.listWithGenresAndDuration);
 
 router.post('/', validate(movieSchema), movieController.create);
 
-module.exports = router;
+export default router;

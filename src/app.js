@@ -1,4 +1,7 @@
-import Server from './models/server';
+import app from './models/server';
 
-const server = new Server();
-server.listen();
+const port = process.env.PORT || 8081;
+
+app.listen(port, () => {
+    console.log(`App listening on http://localhost:${port}`);
+});

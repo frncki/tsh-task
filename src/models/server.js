@@ -1,35 +1,25 @@
 import 'dotenv/config';
 import express from "express";
+import indexRouter from "../routes/index";
+import moviesRouter from "../routes/movies";
 
-class Server {
-    constructor() {
-        this.app = express();
-        this.port = process.env.PORT || 8081;
-        this.paths = {
-            index: "/",
-            movies: "/movies",
-        };
+const app = express();
+const paths = {
+    index: "/",
+    movies: "/movies",
+};
 
-        this.middlewares();
-        this.routes();
-    }
-
-    middlewares () {
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: true }));
-    }
-
-    // Bind controllers to routes
-    routes () {
-        this.app.use(this.paths.index, require("../routes/index"));
-        this.app.use(this.paths.movies, require("../routes/movies"));
-    }
-
-    listen () {
-        this.app.listen(this.port, () => {
-            console.log(`App listening on http://localhost:${process.env.PORT}`);
-        });
-    }
+const middlewares = () => {
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 }
 
-module.exports = Server;
+const routes = () => {
+    app.use(paths.index, indexRouter);
+    app.use(paths.movies, moviesRouter);
+}
+
+middlewares();
+routes();
+
+export default app;
