@@ -9,11 +9,11 @@ const router = express.Router();
 
 router.get('/', movieController.random);
 
-router.get('/', movieController.randomWithDuration);
+router.get('/', movieController.duration);
 
-router.get('/', movieController.listWithGenres);
+router.get('/', movieController.genres);
 
-router.get('/', movieController.listWithGenresAndDuration);
+router.get('/', movieController.genresAndDuration);
 
 router.post('/', validate(movieSchema), movieController.create);
 

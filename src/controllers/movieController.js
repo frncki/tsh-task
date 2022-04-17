@@ -1,7 +1,7 @@
 import apiError from '../mixins/apiError';
 import { readJSON, saveMovie } from '../mixins/dbCommunication';
-import { getMoviesByDuration, getMoviesByGenres } from "../mixins/movies";
-import { randomInt } from "../mixins/random";
+import movieService from '../service/movieService';
+import { randomInt } from "../mixins/misc";
 
 const movieController = {
     random: (req, res, next) => { // no params
@@ -16,12 +16,12 @@ const movieController = {
         }
     },
 
-    randomWithDuration: (req, res, next) => { // duration only
+    duration: (req, res, next) => { // duration only
         const db = readJSON();
         let duration = req.query.duration;
         let genres = req.query.genres;
         if (duration && !genres) {
-            const filteredMovies = getMoviesByDuration(db.movies, duration, 10);
+            const filteredMovies = movieService.listByDuration(db.movies, duration, 10);
             const randomMovieIndex = randomInt(0, filteredMovies.length);
             if (!filteredMovies.length) {
                 return next(apiError.notFound('Could not find movie for given duration'));
@@ -32,12 +32,12 @@ const movieController = {
         }
     },
 
-    listWithGenres: (req, res, next) => { // genres only
+    genres: (req, res, next) => { // genres only
         const db = readJSON();
         let duration = req.query.duration;
         let genres = req.query.genres;
         if (!duration && genres) {
-            const filteredMovies = getMoviesByGenres(db.movies, genres);
+            const filteredMovies = movieService.listByGenres(db.movies, genres);
             if (!filteredMovies.length) {
                 return next(apiError.notFound('Could not find movies with given genres'));
             }
@@ -47,14 +47,14 @@ const movieController = {
         }
     },
 
-    listWithGenresAndDuration: (req, res, next) => { // duration and genres
+    genresAndDuration: (req, res, next) => { // duration and genres
         const db = readJSON();
         const duration = req.query.duration;
         const genres = req.query.genres;
 
         if (duration && genres) {
-            const filteredByGenres = getMoviesByGenres(db.movies, genres);
-            const filteredMovies = getMoviesByDuration(filteredByGenres, duration, 10);
+            const filteredByGenres = movieService.listByGenres(db.movies, genres);
+            const filteredMovies = movieService.listByDuration(filteredByGenres, duration, 10);
 
             if (!filteredMovies.length) {
                 return next(apiError.notFound('Could not find movies with given genres and / or duration'));

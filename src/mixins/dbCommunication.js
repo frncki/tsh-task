@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { generateMovieId } from './movies';
+import movieService from '../service/movieService';
 
 const dataFilePath = path.join(__dirname, '../data/db.json');
 
@@ -18,7 +18,7 @@ export const saveMovie = ({ title, year, runtime, genres, director, actors = "",
     try {
         const db = readJSON();
         const movie = {
-            id: generateMovieId(db),
+            id: movieService.generateId(db),
             title,
             year,
             runtime,
