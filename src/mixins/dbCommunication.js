@@ -10,6 +10,7 @@ export const readJSON = () => {
         const data = JSON.parse(rawData);
         return data;
     } catch (err) {
+        // console.error(err); // dev mode only
         throw new Error("Error while reading JSON");
     }
 }
@@ -20,8 +21,8 @@ export const saveMovie = ({ title, year, runtime, genres, director, actors = "",
         const movie = {
             id: movieService.generateId(db),
             title,
-            year,
-            runtime,
+            year, // this could be parsed to saved it as a string such as: year.toString()
+            runtime, // this could be parsed to saved it as a string such as: runtime.toString()
             genres,
             director,
             actors,
@@ -31,7 +32,7 @@ export const saveMovie = ({ title, year, runtime, genres, director, actors = "",
         db.movies.push(movie);
         fs.writeFileSync(dataFilePath, JSON.stringify(db), { encoding: 'utf8', flag: 'w' });
     } catch (err) {
-        console.error(err);
+        //  console.error(err); // dev mode only
         throw new Error("Error while saving movie");
     }
 }
