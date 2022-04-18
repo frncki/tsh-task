@@ -13,15 +13,8 @@ const serviceHelpers = {
     },
 
     parseInputGenres: (genres) => {
-        let genresToParse = decodeURIComponent(genres).toLowerCase();
-        genresToParse = genresToParse.split(' ').join(''); //removes whitespaces
-        let parsedGenres = genresToParse.match(/\[(.+)\]/);
-        if (parsedGenres) {
-            parsedGenres = parsedGenres[1].split(",");
-        } else {
-            parsedGenres = genresToParse.split(",");
-        }
-        return parsedGenres;
+        let decodedGenres = decodeURIComponent(genres).toLowerCase();
+        return decodedGenres.split(",");
     }
 }
 
