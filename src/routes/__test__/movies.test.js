@@ -5,14 +5,18 @@ describe('positive GET /movies', () => { // positive tests
     it('returns status 200 and random movie', async () => {
         const res = await request(app).get('/movies');
 
+        //console.log(res.headers['content-type']);
+
         expect(res.statusCode).toEqual(200);
+        expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
 
     it('returns status 200 and random movie between specified duration as a query param',
         async () => {
             const res = await request(app).get('/movies?duration=120');
 
-            expect(res.statusCode).toEqual(200); // actual test will be written here!
+            expect(res.statusCode).toEqual(200);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 
@@ -20,7 +24,8 @@ describe('positive GET /movies', () => { // positive tests
         async () => {
             const res = await request(app).get(`/movies?genres=Drama,Thriller,Fantasy`);
 
-            expect(res.statusCode).toEqual(200); // actual test will be written here!
+            expect(res.statusCode).toEqual(200);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 
@@ -28,7 +33,8 @@ describe('positive GET /movies', () => { // positive tests
         async () => {
             const res = await request(app).get('/movies?genres=Drama,Thriller,Fantasy&duration=120');
 
-            expect(res.statusCode).toEqual(200); // actual test will be written here!
+            expect(res.statusCode).toEqual(200);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 
@@ -36,7 +42,8 @@ describe('positive GET /movies', () => { // positive tests
         async () => {
             const res = await request(app).get(`/movies?genres=Soap-Opera,Romantic-Comedy,Fantasy`);
 
-            expect(res.statusCode).toEqual(200); // actual test will be written here!
+            expect(res.statusCode).toEqual(200);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 });
@@ -46,7 +53,8 @@ describe('negative GET /movies', () => { // negative tests
         async () => {
             const res = await request(app).get(`/movies?duration=2137`);
 
-            expect(res.statusCode).toEqual(404); // actual test will be written here!
+            expect(res.statusCode).toEqual(404);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 
@@ -54,7 +62,8 @@ describe('negative GET /movies', () => { // negative tests
         async () => {
             const res = await request(app).get(`/movies?genres=Soap-Opera,Romantic-Comedy,Indie`);
 
-            expect(res.statusCode).toEqual(404); // actual test will be written here!
+            expect(res.statusCode).toEqual(404);
+            expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
         }
     );
 });
@@ -77,8 +86,8 @@ describe('positive POST /movies', () => {
         };
         const res = await request(app).post(`/movies`).send(payload);
 
-        expect(res.statusCode).toEqual(201); // actual test will be written here!
-        expect
+        expect(res.statusCode).toEqual(201);
+        expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
 });
 
@@ -87,7 +96,8 @@ describe('negative POST /movies', () => {
         const payload = {};
         const res = await request(app).post(`/movies`).send(payload);
 
-        expect(res.statusCode).toEqual(400); // actual test will be written here!
+        expect(res.statusCode).toEqual(400);
+        expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
     it('returns status 400 if year is not an integer', async () => {
         const payload = {
@@ -106,6 +116,7 @@ describe('negative POST /movies', () => {
         };
         const res = await request(app).post(`/movies`).send(payload);
 
-        expect(res.statusCode).toEqual(400); // actual test will be written here!
+        expect(res.statusCode).toEqual(400);
+        expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
 });
